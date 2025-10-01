@@ -1,0 +1,78 @@
+---
+import { getContactPath, getHomepagePath } from "../../path";
+import { navigationData } from "../../navigation.ts";
+import { Wrapper } from "../common";
+import { ButtonLink } from "../ui";
+
+---
+
+<header class="z-100">
+    <Wrapper>
+        <div class="flex flex-row justify-between items-center rounded-lg bg-custom-gray py-2 pl-4 h-20">
+            <div class="flex items-center gap-x-24">
+                <a class="block" href={getHomepagePath()}>
+                    <img class="w-36 h-auto" src="/assets/imgs/logo.png" alt="" />
+                </a>
+                <nav class="flex-1 hidden md:block">
+                    <ul class="flex gap-x-8 justify-end items-center">
+                        {
+                            navigationData.links.map((item)=>{
+                                return(
+                                    <li>
+                                        <a href={item.href} class="inline-block py-1 px-1">
+                                            {item.text}
+                                        </a>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </nav>
+            </div>
+            <div class="hidden md:block pr-3">
+                <ButtonLink href={getContactPath()} variant="primary">
+                    Prenota un appuntamento
+                </ButtonLink>
+            </div>
+            <div class="md:hidden">
+                <button class="w-12 flex flex-col gap-y-2 mr-6" id="burger-container">
+                    <p id="burger-text" class="">Menù</p>
+                </button>
+            </div>
+        </div>
+    </Wrapper>
+    <section class="absolute z-300 bg-white top-16 left-4 w-[calc(100%_-32px)] rounded-lg h-auto border border-custom-gray scale-y-0 origin-top transition-transform duration-300 ease-in-out" id="mobile-menu">
+        <ul class="flex flex-col">
+            {
+                navigationData.links.map((item)=>{
+                    return(
+                        <li>
+                            <a href={item.href} class="block text-center relative py-4 border-b">
+                                {item.text}
+                            </a>
+                        </li>
+                    )
+                })
+            }
+            <li>
+                <a href={getContactPath()} class="block text-center relative py-4">
+                    Prenota una seduta
+                </a>
+            </li>
+        </ul>
+    </section>
+</header>
+
+
+<script is:inline>
+    const burger = document.getElementById('burger-container');
+    const menu = document.getElementById('mobile-menu');
+    const burgerText = document.getElementById('burger-text');
+
+    burger.addEventListener('click', () => {
+        const isOpen = menu.classList.toggle('scale-y-0') === false;
+        menu.classList.toggle('scale-y-100');
+
+        burgerText.textContent = isOpen ? 'Chiudi' : 'Menu';
+    });
+</script>

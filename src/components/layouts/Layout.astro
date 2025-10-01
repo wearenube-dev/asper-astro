@@ -1,0 +1,38 @@
+---
+import "~/styles/global.css";
+import { Footer, Navigation, WhatsAppButton } from "../widgets";
+import Seo from "./Seo.astro";
+
+const {title, description, url, image} = Astro.props
+
+---
+
+<html lang="it">
+	<head>
+		<Seo
+			title={title}
+			description={description}
+			url={url}
+			image={image}
+		/>
+	</head>
+	<body>
+		<slot name="topbar">
+
+		</slot>
+	
+		<slot name="navigation">
+			<Navigation />
+		</slot>
+		
+		<main>
+			<slot />
+		</main>
+	
+		<slot name="footer">
+			<Footer />
+		</slot>
+	
+		<WhatsAppButton />
+    </body>
+</html>

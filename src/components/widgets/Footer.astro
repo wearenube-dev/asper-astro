@@ -1,0 +1,89 @@
+---
+import { navigationData } from "~/navigation";
+import { getContactPath, getHomepagePath } from "~/path";
+import { Wrapper } from "../common";
+import { ButtonLink } from "../ui";
+
+import config from "~/config.json"
+
+---
+
+<footer class="pt-32 bg-black text-white">
+    <Wrapper class="">
+        <div class="">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
+                <div class="space-y-6">
+                    <div>
+                        <a href={getHomepagePath()}>
+                            <img class="w-52 h-auto" src="/assets/imgs/logo.png" alt="" />
+                        </a>
+                        <span class="sr-only"></span>
+                        <div class="space-y-1">
+                            <h2 class="mt-8 text-xl">{config.businessInfo.name}</h2>
+                            <p>{config.businessInfo.address.street}, {config.businessInfo.address.postalCode}, {config.businessInfo.address.city} ({config.businessInfo.address.province})</p>
+                            <p>Capitale Sociale: {config.businessInfo.deposit} i.v. </p>
+                            <p>P.IVA: {config.businessInfo.vatID}</p>
+                            <p>N° REA: {config.businessInfo.reaID}</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h2 class="text-xl">Ci trovi in:</h2>
+                        <p>{config.businessInfo.address.street}, {config.businessInfo.address.postalCode}, {config.businessInfo.address.city} ({config.businessInfo.address.province})</p>
+                    </div>
+                    <div class="space-y-1">
+                        <h2 class="text-xl">Contatti</h2>
+                        <p>Email: <a href=`mailto:${config.businessInfo.contact.email.sales}` target="_blank">{config.businessInfo.contact.email.sales}</a></p>
+                        <p>Telefono: <a href=`tel:${config.businessInfo.contact.phone.mobile}` target="_blank">{config.businessInfo.contact.phone.mobile}</a></p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <h2 class="text-xl">Mappa del sito</h2>
+                    <ul class="space-y-1">
+                        {
+                            navigationData.links.map(i=>{
+                                return(
+                                    <li>
+                                        <a href={i.href} class="inline-block relative py-1 px-1">{i.text}</a>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h2 class="text-xl">Servizi</h2>
+                    <ul class="space-y-1">
+                        <!-- {
+                            servicesData.links.map(i=>{
+                                return(
+                                    <li>
+                                        <a href={`/servizi${i.href}`} class="inline-block tracking-wider relative py-1 px-1 overflow-hidden group">
+                                            <p>{i.text}</p>
+                                            <span class="block absolute bottom-0 left-0 w-full h-[1px] bg-jacksons-purple-600 transition-all duration-500 ease-in-out -translate-x-full group-hover:translate-x-full"></span>
+                                        </a>
+                                    </li>
+                                )
+                            })
+                        } -->
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h2 class="text-xl">Richiedi un appuntamento</h2>
+                    <p>Affidati al nostro team per trattamenti efficaci, su misura e all’avanguardia.</p>
+                    <div>
+                        <ButtonLink href={getContactPath()} variant="primary" >
+                            Contatti
+                        </ButtonLink>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-zinc-800 mt-24 pt-6 pb-6 flex flex-col gap-y-2 md:flex-row justify-between md:items-center">
+                <p>&copy; {new Date().getFullYear()} {config.businessInfo.name}. Tutti i diritti sono riservati.</p>
+                <p class="space-x-4">
+                    <a href=`https://www.iubenda.com/privacy-policy/${config.privacy.vendors.iubenda.iubID}/` target="_blank" class="inline-block relative py-1 px-1">Privacy Policy</a>
+                    <a href=`https://www.iubenda.com/privacy-policy/${config.privacy.vendors.iubenda.iubID}/cookie-policy` target="_blank" class="inline-block relative py-1 px-1">Cookie Policy</a>
+                </p>
+            </div>
+        </div>
+    </Wrapper>
+</footer>

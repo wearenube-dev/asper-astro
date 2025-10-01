@@ -1,0 +1,41 @@
+---
+interface Crumb {
+    label: string;
+    href: string;
+}
+
+const { url } = Astro.request;
+const path = new URL(url).pathname;
+
+const segments = path
+    .split('/')
+    .filter(Boolean);
+
+// Genera le briciole con href progressivi
+const crumbs: Crumb[] = segments.map((segment, index) => {
+    const href = '/' + segments.slice(0, index + 1).join('/');
+    const label = decodeURIComponent(segment).replace(/-/g, ' ');
+    return { href, label: label.charAt(0).toUpperCase() + label.slice(1) };
+});
+---
+
+<nav class="mb-4" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1">
+        <li>
+            <a href="/" class="hover:underline">Home</a>
+            <span class="mx-1">/</span>
+        </li>
+        {crumbs.map((crumb, index) => (
+            <li>
+                {index < crumbs.length - 1 ? (
+                <>
+                    <a href={crumb.href} class="hover:underline">{crumb.label}</a>
+                    <span class="mx-1">/</span>
+                </>
+                ) : (
+                    <span class="text-gray-900">{crumb.label}</span>
+                )}
+            </li>
+        ))}
+    </ol>
+</nav>

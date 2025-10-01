@@ -1,0 +1,59 @@
+---
+import config from "~/config.json"
+
+interface Metadata {
+    title?: string,
+    description?: string,
+    url?: string,
+    image?: string
+}
+
+const {
+    title = config.seo.metadata.title.default,
+    description = config.seo.metadata.description.default,
+    url = config.site.url,
+    image = config.seo.metadata.openGraph.image.url,
+} = Astro.props as Metadata;
+---
+
+<link rel="icon" type="image/svg+xml" href={config.site.favicon.url} />
+
+<title>{config.seo.metadata.title.template.replace("%s", title)}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={url} />
+<meta name="author" content={config.seo.metadata.openGraph.author} />
+<meta name="generator" content={Astro.generator} />
+
+<!-- SEO base -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+{config.seo.googleSiteVerificationId && (
+    <meta name="google-site-verification" content={config.seo.googleSiteVerificationId} />
+)}
+
+{config.seo.metadata.robots.index === false && (
+    <meta name="robots" content="noindex, nofollow" />
+)}
+{config.seo.metadata.robots.index === true && (
+    <meta name="robots" content="index, follow" />
+)}
+
+{config.seo.metadata.robots.sitemap && (
+    <link rel="sitemap" type="application/xml" href={config.seo.metadata.robots.sitemap} />
+)}
+
+<!-- Open Graph -->
+<meta property="og:title" content={config.seo.metadata.title.template.replace("%s", title)} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={config.seo.metadata.openGraph.type} />
+<meta property="og:site_name" content={config.seo.metadata.openGraph.site_name} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={image} />
+<meta property="og:locale" content="it_IT" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />

@@ -1,0 +1,20 @@
+---
+import { Layout } from "~/components/layouts";
+import { ButtonLink } from "~/components/ui";
+import {getHomepagePath} from "~/path.ts"
+---
+
+<Layout
+	title="Homepage"
+	description=""
+	url=""
+	image=""
+>
+	<div>
+		<ButtonLink href={getHomepagePath()} variant="primary" size="medium" id="test">
+			Questo è un bottone
+		</ButtonLink>
+	</div>
+</Layout>
+
+

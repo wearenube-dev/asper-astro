@@ -1,0 +1,20 @@
+---
+
+import Layout from "~/components/layouts/Layout.astro";
+import ButtonLink from "~/components/ui/ButtonLink.astro";
+import {getHomepagePath} from "~/path.ts"
+
+---
+<Layout
+	title="Homepage"
+	description=""
+	url=""
+	image=""
+>
+	<h1>Contatti</h1>
+	<div>
+		<ButtonLink href={getHomepagePath()} variant="secondary" />
+	</div>
+</Layout>
+
+

@@ -1,0 +1,127 @@
+{
+    "site":{
+        "name":"",
+        "url":"",
+        "basePath":"/",
+        "favicon":{
+            "url":"/favicon.svg"
+        }       
+    },
+
+    "seo":{
+        "googleSiteVerificationId": "",
+        "metadata":{
+            "title":{
+                "default":"",
+                "template":"%s - "
+            },
+            "description":{
+                "default":""
+            },
+            "robots":{
+                "index":true,
+                "sitemap":""
+            },
+            "openGraph":{
+                "site_name":"",
+                "image":{
+                    "url":"",
+                    "width":1200,
+                    "height":628
+                },
+                "type":"website",
+                "author":""
+            }
+        }
+    },
+
+    "analytics":{
+        "vendors":{
+            "google":{
+                "gtmID":""
+            },
+            "clarity":{
+                "clarityID":""
+            }
+        }
+    },
+
+    "privacy":{
+        "vendors":{
+            "iubenda":{
+                "iubID":""
+            }
+        }
+    },
+
+    "businessInfo":{
+        "name":"",
+        "logo":{
+            "url":""
+        },
+        "address":{
+            "street":"",
+            "postalCode":"",
+            "city":"",
+            "province":""
+        },
+        "vatID":"",
+        "reaID":"",
+        "deposit":"",
+        "contact":{
+            "phone":{
+                "mobile":"",
+                "office":"",
+                "whatsapp":""
+            },
+            "email":{
+                "sales":"",
+                "support":""
+            },
+            "pec":""
+        },
+        "openingHours": "",
+        "socialMedia":{
+            "facebook":{
+                "url":""
+            },
+            "instagram":{
+                "url":""
+            },
+            "tiktok":{
+                "url":""
+            },
+            "youtube":{
+                "url":""
+            },
+            "pinterest":{
+                "url":""
+            },
+            "x":{
+                "url":""
+            },
+            "linkedin":{
+                "url":""
+            },
+            "threads":{
+                "url":""
+            },
+            "snapchat":{
+                "url":""
+            },
+            "github":{
+                "url":""
+            },
+            "googleMyBusiness":{
+                "url":""
+            }
+        },
+        "onlineReservation":{
+            "url":""
+        },
+        "coordinates":{
+            "lat": 10,
+            "long": 45
+        }
+    }
+}

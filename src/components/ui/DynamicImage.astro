@@ -1,0 +1,11 @@
+---
+const { imageUrl, altText, ...props } = Astro.props;
+---
+<img
+    src={`${imageUrl}?w=400&fm=webp`}
+    srcset={`${imageUrl}?w=400&fm=webp 400w, ${imageUrl}?w=800&fm=webp 800w`}
+    sizes="(max-width: 768px) 100vw, 50vw"
+    alt={altText}
+    loading="lazy"
+    {...props}
+/>

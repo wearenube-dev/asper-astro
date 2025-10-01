@@ -1,0 +1,15 @@
+---
+import { Image } from 'astro:assets';
+
+const {src, alt, widths, sizes, quality, priority=false} = Astro.props
+// (max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, 980px
+---
+
+<Image 
+    src={src}
+    alt={alt}
+    widths={widths}
+    sizes={sizes}
+    quality={quality}
+    priority={priority}
+/>

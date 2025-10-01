@@ -1,0 +1,13 @@
+---
+import { Wrapper, Breadcrumbs } from "../common"
+
+const {title} = Astro.props
+---
+
+<div class="py-24 bg-zinc-700 text-white">
+    <Wrapper>
+        <Breadcrumbs />
+        <h1>{title}</h1>
+        <slot />
+    </Wrapper>
+</div>
