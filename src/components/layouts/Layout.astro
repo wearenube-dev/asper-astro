@@ -2,6 +2,8 @@
 import "~/styles/global.css";
 import { Footer, Navigation, WhatsAppButton } from "../widgets";
 import Seo from "./Seo.astro";
+import config from "~/config.json"
+import { GoogleTagmanager, GoogleTagmanagerNoscript } from "@digi4care/astro-google-tagmanager";
 
 const {title, description, url, image} = Astro.props
 
@@ -9,30 +11,48 @@ const {title, description, url, image} = Astro.props
 
 <html lang="it">
 	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="view-transition" content="same-origin">
+
+		<GoogleTagmanager id={config.analytics.vendors.google.gtmID} />
+
 		<Seo
 			title={title}
 			description={description}
 			url={url}
 			image={image}
 		/>
+
+		<style>
+			@view-transition {
+			  navigation: auto; /* enabled! */
+			}
+		</style>
 	</head>
 	<body>
-		<slot name="topbar">
-
-		</slot>
-	
-		<slot name="navigation">
-			<Navigation />
-		</slot>
+		<GoogleTagmanagerNoscript id={config.analytics.vendors.google.gtmID} />
 		
-		<main>
-			<slot />
-		</main>
-	
-		<slot name="footer">
-			<Footer />
-		</slot>
-	
-		<WhatsAppButton />
+		<div class="page-container">
+			<slot name="topbar">
+
+			</slot>
+		
+			<slot name="navigation">
+				<Navigation />
+			</slot>
+			
+			<main>
+				<slot />
+			</main>
+		
+			<slot name="footer">
+				<Footer />
+			</slot>
+		
+			<WhatsAppButton />
+		</div>
+
     </body>
 </html>

@@ -51,49 +51,29 @@ export default function ContactForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-2">
-                <label htmlFor="" className="block !font-seasons font-medium text-lg">Nome e cognome*</label>
-                <input
-                    type="text"
-                    placeholder="Nome"
-                    {...register("name")}
-                    className="block border border-bismark-500 rounded p-4 w-full focus:outline-bismark-500 placeholder:font-light text-lg font-light"
-                />
-                {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+                <Label htmlFor="fullName">Nome e cognome*</Label>
+                <Input type="text" placeholder="Nome e cognome" id="fullName" {...register("name")} />
+                {errors.name && <ErrorMessage error={errors.name.message}/>}
             </div>
 
             <div className="space-y-2">
-                <label htmlFor="" className="block !font-seasons font-medium text-lg">Email*</label>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    {...register("email")}
-                    className="block border border-bismark-500 rounded p-4 w-full focus:outline-bismark-500 placeholder:font-light text-lg font-light"
-                />
-                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+                <Label htmlFor="email">Email*</Label>
+                <Input type="email" placeholder="Email" id="email" {...register("email")} />
+                {errors.email && <ErrorMessage error={errors.email.message}/>}
             </div>
 
             <div className="space-y-2">
-                <label htmlFor="" className="block !font-seasons font-medium text-lg">Telefono*</label>
-                <input
-                    type="text"
-                    placeholder="Telefono"
-                    {...register("phone")}
-                    className="block border border-bismark-500 rounded p-4 w-full focus:outline-bismark-500 placeholder:font-light text-lg font-light"
-                />
-                {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
+                <Label htmlFor="phone">Telefono*</Label>
+                <Input type="text" placeholder="Telefono" id="phone" {...register("phone")} />
+                {errors.phone && <ErrorMessage error={errors.phone.message}/>}
             </div>
 
             <div className="space-y-2">
-                <label htmlFor="" className="block !font-seasons font-medium text-lg">Come possiamo aiutarti?*</label>
-                <textarea
-                    placeholder="Messaggio"
-                    rows={4}
-                    {...register("message")}
-                    className="block border border-bismark-500 rounded p-4 w-full focus:outline-bismark-500 placeholder:font-light text-lg font-light"
-                />
-                {errors.message && <p className="text-red-500 text-sm">{errors.message.message}</p>}
+                <Label htmlFor="message">Come possiamo aiutarti?*</Label>
+                <textarea placeholder="Messaggio" id="message" rows={4} {...register("message")} className="block border rounded p-2.5 w-full" />
+                {errors.message && <ErrorMessage error={errors.message.message}/>}
             </div>
 
             <div>
@@ -103,19 +83,58 @@ export default function ContactForm() {
                         {...register("privacy")}
                         className="border p-2 inline"
                     />
-                    <p>Accetto la <a href="https://www.iubenda.com/privacy-policy/70719383/" target="_blank">privacy policy</a>.</p>
+                    <p>Accetto il trattamento dei miei dati personali come descritto nella <a href="https://www.iubenda.com/privacy-policy/70719383/" target="_blank" className="underline">privacy policy</a>.</p>
                 </label>
                 
-                {errors.privacy && <p className="text-red-500 text-sm">{errors.privacy.message}</p>}
+                {errors.privacy && <ErrorMessage error={errors.privacy.message} />}
             </div>
 
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex w-full items-center font-raleway justify-center px-8 py-4 rounded-lg font-light transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-jacksons-purple-900 text-white hover:scale-[0.99] focus:ring-bismark-500 cursor-pointer"
+                className="flex w-full items-center justify-center px-8 py-4 rounded-lg transition-all duration-200 ease-in-out focus:outline-none bg-blue-600 text-white hover:scale-[0.99] cursor-pointer"
             >
                 {isSubmitting ? "Invio in corso..." : "Invia richiesta"}
             </button>
         </form>
     );
+}
+
+interface LabelProps {
+    htmlFor: string,
+    children: React.ReactNode
+}
+
+const Label = ({htmlFor, children}:LabelProps) =>{
+    return(
+        <label htmlFor={htmlFor} className="block">{children}</label>
+    )
+}
+
+interface ErrorMessageProps {
+    error?: string
+}
+
+const ErrorMessage = ({error}:ErrorMessageProps) =>{
+    return(
+        <p className="text-red-500 text-sm">{error}</p>
+    )
+}
+
+interface InputProps {
+    type: string,
+    placeholder: string,
+    id: string,
+}
+
+const Input = ({type, placeholder, id, ...props}:InputProps) =>{
+    return(
+        <input
+            type={type}
+            placeholder={placeholder}
+            id={id}
+            {...props}
+            className="block border rounded p-2.5 w-full"
+        />
+    )
 }

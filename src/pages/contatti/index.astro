@@ -1,8 +1,10 @@
 ---
 
+import { Wrapper } from "~/components/common";
 import Layout from "~/components/layouts/Layout.astro";
-import ButtonLink from "~/components/ui/ButtonLink.astro";
-import {getHomepagePath} from "~/path.ts"
+import { ContactForm } from "~/components/widgets";
+import PageHeader from "~/components/widgets/PageHeader.astro";
+import config from "~/config.json"
 
 ---
 <Layout
@@ -11,10 +13,38 @@ import {getHomepagePath} from "~/path.ts"
 	url=""
 	image=""
 >
-	<h1>Contatti</h1>
-	<div>
-		<ButtonLink href={getHomepagePath()} variant="secondary" />
-	</div>
+	<PageHeader 
+		title="Contatti"
+	/>
+
+	<section class="py-32">
+		<Wrapper>
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-x-24 gap-y-12">
+				<div>
+					<div class="space-y-4">
+						<h2 class="text-3xl">Contatti</h2>
+						<div>
+							<p class="text-xl">Email</p>
+							<a href={`mailto:${config.businessInfo.contact.email.sales}`} target="_blank" class="inline-block">{config.businessInfo.contact.email.sales}</a>
+						</div>
+						<div>
+							<p class="text-xl">Telefono</p>
+							<a href={`tel:${config.businessInfo.contact.phone.mobile}`} class="inline-block">{config.businessInfo.contact.phone.mobile}</a>
+						</div>
+						<div>
+							<p class="text-xl">WhatsApp</p>
+							<a href={`https://wa.me/${config.businessInfo.contact.phone.whatsapp}`} class="inline-block" target="_blank">Scrivimi un messaggio</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-span-1 md:col-span-2">
+					<ContactForm client:load/>
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+
+
 </Layout>
 
 
